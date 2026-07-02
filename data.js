@@ -1,4 +1,4 @@
-// لينا البطاح
+
 
 const PERSONALITIES = {
 
