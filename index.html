@@ -1,0 +1,136 @@
+<!-- HTML | Hala Alashraf -->
+
+<div class="container">
+
+  <!-- الصفحة 1: الرئيسية -->
+  <div class="screen active" id="screen-intro">
+
+    <!-- شارة النادي -->
+    <div class="intro-badge">🤖 نادي الروبوت والرياضات · Robotic & sports club. IMSIU</div>
+
+    <!-- العنوان الرئيسي -->
+    <h1 class="intro-title">بصمتك الرقمية</h1>
+
+    <!-- العنوان الفرعي -->
+    <h2 class="intro-sub-title">من انت خلف الشاشة؟</h2>
+
+    <!-- وصف الاختبار -->
+    <p class="intro-sub">25 سؤال سريع يكشف شخصيتك الرقمية الحقيقية بناءً على سلوكك اليومي – نتيجة واحدة دقيقة، لا تشتيت ولا نسب كثيرة</p>
+
+    <!-- إحصائيات سريعة -->
+    <div class="stats-row">
+      <div class="stat-chip"><span class="num">25</span><span class="label">سؤال</span></div>
+      <div class="stat-chip"><span class="num">10</span><span class="label">شخصية</span></div>
+      <div class="stat-chip"><span class="num">10~</span><span class="label">دقائق</span></div>
+    </div>
+
+    <!-- الشخصيات العشر -->
+    <div class="personalities-grid">
+      <span class="p-chip">😈 المماطل الذكي</span>
+      <span class="p-chip">🔬 الباحث عن الكمال</span>
+      <span class="p-chip">😔 مدمن المقارنة</span>
+      <span class="p-chip">👻 المختفي وقت الأزمات</span>
+      <span class="p-chip">🪫 المستنزَف دائمًا</span>
+      <span class="p-chip">🌀 مشتت العصر</span>
+      <span class="p-chip">🎯 المنضبط الصامت</span>
+      <span class="p-chip">🔁 أسير الروتين</span>
+      <span class="p-chip">🤯 العالق في البداية</span>
+      <span class="p-chip">📱 مدمن الدوبامين</span>
+    </div>
+
+    <!-- زر بدء الاختبار — يستدعي دالة startQuiz() في JS -->
+    <button class="btn-primary" onclick="startQuiz()">ابدأ الاختبار ←</button>
+
+  </div>
+
+
+  <!-- الصفحة 2: الأسئلة -->
+  <div class="screen screen-quiz" id="screen-quiz">
+
+    <!-- رقم السؤال -->
+    <div class="progress-top">
+      <span class="progress-count" id="progress-count"></span> <!-- JS يكتب: السؤال 1 من 25 -->
+    </div>
+
+    <!-- شريط التقدم المرئي -->
+    <div class="progress-bar-track">
+      <div class="progress-bar-fill" id="progress-bar"></div> <!-- JS يغير العرض % -->
+    </div>
+
+    <!-- بطاقة السؤال -->
+    <div class="question-card" id="question-card">
+      <div class="question-text" id="q-text"></div>          <!-- JS يكتب نص السؤال -->
+      <div class="options-grid" id="options-container"></div> <!-- JS يولّد الخيارات الأربعة -->
+    </div>
+
+    <!-- زر التالي — معطّل حتى يختار المستخدم إجابة -->
+    <button class="btn-next-big" id="btn-next" onclick="nextQuestion()" disabled>التالي ←</button>
+
+  </div>
+
+
+  <!-- الصفحة 3: شاشة التحميل -->
+  <!-- تظهر بعد آخر سؤال أثناء حساب النتيجة -->
+  <div class="screen screen-loading" id="screen-loading">
+
+    <!-- دائرة التحميل -->
+    <div class="loading-ring"></div>
+
+    <div class="loading-text">جاري تحليل شخصيتك...</div>
+    <div class="loading-sub">نربط إجاباتك بأنماط سلوكية دقيقة</div>
+
+    <div class="analyzing-steps">
+      <div class="analyze-step" id="step1"><div class="step-dot"></div>تحليل أنماط الجوال</div>
+      <div class="analyze-step" id="step2"><div class="step-dot"></div>قياس مستوى الإنتاجية</div>
+      <div class="analyze-step" id="step3"><div class="step-dot"></div>تقييم عادات النوم</div>
+      <div class="analyze-step" id="step4"><div class="step-dot"></div>تحديد الشخصية</div>
+    </div>
+
+  </div>
+
+
+  <!-- الصفحة 4: النتيجة -->
+  <!-- كل العناصر فارغة — JS يملأها بناءً على أعلى نقاط -->
+  <div class="screen screen-result" id="screen-result">
+
+    <div class="result-top">
+      <span class="result-confetti">🎉</span>
+    </div>
+
+    <!-- بطاقة الشخصية الرئيسية -->
+    <div class="result-card-main">
+      <span class="result-emoji" id="res-emoji"></span>     <!-- JS يكتب إيموجي الشخصية -->
+      <div class="result-badge-label">شخصيتك الرقمية</div>
+      <div class="result-type" id="res-type"></div>         <!-- JS يكتب اسم الشخصية -->
+
+      <div class="result-shock-box">
+        <div class="shock-text" id="res-shock"></div>       <!-- JS يكتب الجملة الصادمة -->
+      </div>
+
+      <div class="result-desc" id="res-desc"></div>         <!-- JS يكتب وصف الشخصية -->
+
+      <!-- الحل -->
+      <div class="tips-title">✨ خطوات تبدأ بها الآن</div>
+      <ul class="tips-list" id="res-tips"></ul>             <!-- JS يولّد عناصر القائمة -->
+    </div>
+
+    <!-- توزيع النقاط على الشخصيات -->
+    <div class="score-section">
+      <div class="score-label">📊 توزيع نقاطك</div>
+      <div id="scores-chart"></div>                         <!-- JS يولّد أشرطة النسب -->
+    </div>
+
+    <!-- الأزرار -->
+    <div class="result-actions">
+      <button class="btn-share" onclick="copyResult()">📋 انسخ النتيجة</button>
+      <button class="btn-restart" onclick="restartQuiz()">🔁 أعد الاختبار</button> <!-- يرجع للصفحة الرئيسية -->
+    </div>
+
+    <div class="footer-label">Robotic & sports club. IMSIU تم تطويره بواسطة نادي الروبوت والرياضات · IMS</div>
+
+  </div>
+
+</div>
+
+<!-- إشعار النسخ — يظهر أسفل الشاشة لثواني عند الضغط على انسخ النتيجة -->
+<div class="toast" id="toast">تم نسخ النتيجة! 🎉</div>
